@@ -18,5 +18,6 @@ namespace FileAssortment
             var w = new MainWindow();
             w.ShowDialog();
         }
+
     }
 }

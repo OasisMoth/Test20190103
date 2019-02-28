@@ -3,13 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:FileAssortment"
         mc:Ignorable="d"
         Title="FileAssortment"
-        Width="800"
-        Height="500"
-        AllowDrop="True"
-        Drop="Window_Drop"
-        PreviewDragOver="Window_PreviewDragOver"
+        SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Window.Resources>
@@ -18,34 +15,31 @@
             <Setter Property="Height" Value="30"/>
         </Style>
     </Window.Resources>
+    <Window.DataContext>
+        <vm:MainWindowDataContext />
+    </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="9*"/>
-            <RowDefinition/>
+
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" HorizontalAlignment="Right">
-            <StackPanel Orientation="Horizontal" >
-                <Button Content="ルールの追加" Margin="5"></Button>
-                <Button Content="実行" Margin="5"></Button>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="1">
+        <Grid >
             <StackPanel  Orientation="Horizontal" >
-                <DataGrid Width="200"
-                          Margin="10"
-                          VerticalScrollBarVisibility="Visible"
-                          HorizontalScrollBarVisibility="Auto">
-
-                </DataGrid>
-                <DataGrid Width="550"
-                          Margin="10"
-                          VerticalScrollBarVisibility="Visible"
-                          HorizontalScrollBarVisibility="Auto"
-                          ItemsSource="{Binding OriginNames}">
-
-                </DataGrid>
+                <TextBox Width="450"
+                         Margin="10"
+                         HorizontalScrollBarVisibility="Auto"
+                         IsReadOnly="True"
+                         Text="{Binding Path=TargetDirectory}">
+                </TextBox>
+                <StackPanel Orientation="Vertical">
+                    <Button Content="ディレクトリ指定"
+                            Margin="5"
+                            Command="{Binding Path=TargetCommand}"></Button>
+                    <Button Content="実行"
+                            Margin="5"
+                            Command="{Binding Path=AssortCommand}"></Button>
+                </StackPanel>
+                
             </StackPanel>
         </Grid>
     </Grid>

@@ -22,7 +22,6 @@ namespace FileAssortment
             var targetFiles = targetDirInfo.EnumerateFiles();
             var targetSubDirs = targetDirInfo.GetDirectories();
 
-
             foreach (var file in targetFiles)
             {
                 var spaceIndex = file.Name.IndexOf(" ");
@@ -33,13 +32,13 @@ namespace FileAssortment
                     if (subDir.Name == splitFileName && File.Exists(Path.Combine(subDir.FullName, file.Name)) == false)
                     {
                         file.MoveTo(Path.Combine(subDir.FullName, file.Name));
-                        logger.Info($"Folder\"{subDir.Name}\" {file.Name}");
+                        logger.Info($"Folder\"{subDir.Name}\" :{file.Name}");
                         break;
                     }
                 }
             }
 
-            MessageBox.Show("ファイルの仕分けが完了しました。");
+            MessageBox.Show(Resources.M_AssortComplete, Resources.W_ApplicationTitle, MessageBoxButton.OK);
         }
 
         public string TargetAction()
@@ -48,7 +47,6 @@ namespace FileAssortment
             {
                 IsFolderPicker = true
             };
-
             var ret = dialog.ShowDialog();
 
             if (ret == CommonFileDialogResult.Ok) return dialog.FileName;

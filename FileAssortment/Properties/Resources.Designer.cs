@@ -61,11 +61,38 @@ namespace FileAssortment.Properties {
         }
         
         /// <summary>
+        ///   ファイルの仕分けが完了しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string M_AssortComplete {
+            get {
+                return ResourceManager.GetString("M_AssortComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   フォルダーを選択してください に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string M_NoSelectFolder {
             get {
                 return ResourceManager.GetString("M_NoSelectFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   想定外のエラーが発生しました。詳細はログに出力されます。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string M_UnhandledException {
+            get {
+                return ResourceManager.GetString("M_UnhandledException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ファイルアソーター に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string W_ApplicationTitle {
+            get {
+                return ResourceManager.GetString("W_ApplicationTitle", resourceCulture);
             }
         }
         

@@ -19,7 +19,7 @@ namespace FileAssortment
         {
             var targetDirInfo = new DirectoryInfo(targetDir);
 
-            var targetFiles = targetDirInfo.EnumerateFiles();
+            var targetFiles =  targetDirInfo.EnumerateFiles();
             var targetSubDirs = targetDirInfo.GetDirectories();
 
             foreach (var file in targetFiles)
@@ -49,7 +49,11 @@ namespace FileAssortment
             };
             var ret = dialog.ShowDialog();
 
-            if (ret == CommonFileDialogResult.Ok) return dialog.FileName;
+            if (ret == CommonFileDialogResult.Ok)
+            {
+                logger.Info($"Target folder :{dialog.FileName}");
+                return dialog.FileName;
+            }
             return Resources.M_NoSelectFolder;
         }
     }

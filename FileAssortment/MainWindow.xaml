@@ -4,16 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:FileAssortment"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:prop="clr-namespace:FileAssortment.Properties"
         mc:Ignorable="d"
         Title="FileAssortment"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Width" Value="90"/>
-            <Setter Property="Height" Value="30"/>
-        </Style>
+        <ResourceDictionary Source="/Style/StyleDic.xaml" />
     </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowDataContext />
@@ -25,21 +24,31 @@
         </Grid.RowDefinitions>
         <Grid >
             <StackPanel  Orientation="Horizontal" >
-                <TextBox Width="450"
-                         Margin="10"
-                         HorizontalScrollBarVisibility="Auto"
-                         IsReadOnly="True"
-                         Text="{Binding Path=TargetDirectory}">
-                </TextBox>
                 <StackPanel Orientation="Vertical">
-                    <Button Content="ディレクトリ指定"
+                    <TextBox Width="450"
+                             Height="30"
+                             Margin="5"
+                             HorizontalScrollBarVisibility="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding Path=TargetDirectory}">
+                    </TextBox>
+                    <StackPanel Orientation="Horizontal" Visibility="Visible">
+                        <TextBlock Text="{x:Static prop:Resources.M_Processing}"
+                                   Margin="5"/>
+                        <mah:ProgressRing Width="5"
+                                          Height="5"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Button Content="{x:Static prop:Resources.B_ChooseTargetDir}"
                             Margin="5"
+                            Style="{StaticResource ButtonBase}"
                             Command="{Binding Path=TargetCommand}"></Button>
-                    <Button Content="実行"
+                    <Button Content="{x:Static prop:Resources.B_Action}"
                             Margin="5"
+                            Style="{StaticResource ButtonBase}"
                             Command="{Binding Path=AssortCommand}"></Button>
                 </StackPanel>
-                
             </StackPanel>
         </Grid>
     </Grid>

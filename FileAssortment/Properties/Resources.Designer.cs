@@ -61,6 +61,24 @@ namespace FileAssortment.Properties {
         }
         
         /// <summary>
+        ///   実行 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string B_Action {
+            get {
+                return ResourceManager.GetString("B_Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   フォルダー選択 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string B_ChooseTargetDir {
+            get {
+                return ResourceManager.GetString("B_ChooseTargetDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   ファイルの仕分けが完了しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string M_AssortComplete {
@@ -75,6 +93,15 @@ namespace FileAssortment.Properties {
         public static string M_NoSelectFolder {
             get {
                 return ResourceManager.GetString("M_NoSelectFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   処理中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string M_Processing {
+            get {
+                return ResourceManager.GetString("M_Processing", resourceCulture);
             }
         }
         

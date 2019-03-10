@@ -30,7 +30,7 @@ namespace FileAssortment
 
             // 例外処理済みのフラグを立て,プログラムを正常終了させる
             e.Handled = true;
-            Environment.Exit(0);
+            this.Shutdown();
         }
 
     }

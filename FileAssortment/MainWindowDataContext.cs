@@ -33,7 +33,7 @@ namespace FileAssortment
 
         private void AssortExecute()
         {
-            _assorter.AssortAction(this.TargetDirectory);
+            _assorter.AssortFile(this.TargetDirectory);
         }
 
         private bool CanAssortExecute()
@@ -58,7 +58,7 @@ namespace FileAssortment
 
         private void TargetExecute()
         {
-            this.TargetDirectory = this._assorter.TargetAction();
+            this.TargetDirectory = this._assorter.SelectDirectory();
         }
         #endregion
     }

@@ -11,7 +11,6 @@ using System.Windows;
 
 namespace FileAssortment
 {
-    public class AssortStartEventArgs : EventArgs { }
     public class AssortCompleteEventArgs : EventArgs
     {
         public bool isError;
@@ -30,10 +29,9 @@ namespace FileAssortment
             var targetDirInfo = new DirectoryInfo(targetDir);
             var fileNamesGroup = new Dictionary<string, List<string>>();
 
-            // todo tryCatchはforeachの内側に
-            try
+            foreach (var file in targetDirInfo.EnumerateFiles())
             {
-                foreach (var file in targetDirInfo.EnumerateFiles())
+                try
                 {
                     var splitFileName = PickNameTagFromFile(file.Name);
                     var newFullFilePath = Path.Combine(targetDir, splitFileName, file.Name);
@@ -41,7 +39,7 @@ namespace FileAssortment
                     if (targetDirInfo.GetDirectories().Any(dir => dir.Name == splitFileName) && File.Exists(newFullFilePath) == false)
                     {
                         file.MoveTo(newFullFilePath);
-                        logger.Info($"Folder\"{splitFileName}\" :{file.Name}");
+                        logger.Info($"File Move :{file.Name}");
                     }
                     else
                     {
@@ -51,34 +49,34 @@ namespace FileAssortment
                         }
                         else
                         {
-                            fileNamesGroup.Add(splitFileName, new List<string>{file.Name});
+                            fileNamesGroup.Add(splitFileName, new List<string> { file.Name });
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                logger.Error("FileAssort occured error.", e);
+                catch (Exception e)
+                {
+                    logger.Error($"FileAssort occured error. File:{file.Name}", e);
+                }
             }
 
-            // todo tryCatchはforeachの内側に
-            try
+            // todo '2'に関して、ユーザー設定にする
+            foreach (var fileNames in fileNamesGroup.Where(x => x.Value.Count() >= 2).Select(x => x.Value))
             {
-                // todo '2'に関して、ユーザー設定にする
-                foreach (var fileNames in fileNamesGroup.Where(x => x.Value.Count() >= 2).Select(x => x.Value))
+                foreach (var fileName in fileNames)
                 {
-                    foreach (var fileName in fileNames)
+                    try
                     {
                         var newDirPath = Path.Combine(targetDir, PickNameTagFromFile(fileName));
 
                         if (Directory.Exists(newDirPath) == false) Directory.CreateDirectory(newDirPath);
                         File.Move(Path.Combine(targetDir, fileName), Path.Combine(newDirPath, fileName));
+                        logger.Info($"File Move :{fileName}");
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Error($"FileAssort occured error. File:{fileName}", e);
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                logger.Error("FileAssort occured error.", e);
             }
 
             MessageBox.Show(Resources.M_AssortComplete, Resources.W_ApplicationTitle, MessageBoxButton.OK);

@@ -10,7 +10,7 @@
         Title="FileAssortment"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="CanMinimize">
     <Window.Resources>
         <ResourceDictionary Source="/Style/StyleDic.xaml" />
     </Window.Resources>
@@ -20,9 +20,15 @@
 
     <Grid>
         <Grid.RowDefinitions>
-
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid >
+        <Grid Grid.Row="0">
+            <Menu>
+                <MenuItem Header="{x:Static prop:Resources.B_Config}" />
+            </Menu>
+        </Grid>
+        <Grid Grid.Row="1">
             <StackPanel  Orientation="Horizontal" >
                 <StackPanel Orientation="Vertical">
                     <TextBox Width="450"
@@ -43,11 +49,11 @@
                     <Button Content="{x:Static prop:Resources.B_ChooseTargetDir}"
                             Margin="5"
                             Style="{StaticResource ButtonBase}"
-                            Command="{Binding Path=TargetCommand}"></Button>
+                            Command="{Binding Path=TargetButton}"></Button>
                     <Button Content="{x:Static prop:Resources.B_Action}"
                             Margin="5"
                             Style="{StaticResource ButtonBase}"
-                            Command="{Binding Path=AssortCommand}"></Button>
+                            Command="{Binding Path=AssortButton}"></Button>
                 </StackPanel>
             </StackPanel>
         </Grid>

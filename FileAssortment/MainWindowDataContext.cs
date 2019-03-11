@@ -21,15 +21,15 @@ namespace FileAssortment
         #endregion
 
         #region AssortButton
-        public DelegateCommand AssortCommand
+        public DelegateCommand AssortButton
         {
             get
             {
-                if(this._AssortCommand == null) this._AssortCommand = new DelegateCommand(AssortExecute, CanAssortExecute);
-                return this._AssortCommand;
+                if(this._AssortButton == null) this._AssortButton = new DelegateCommand(AssortExecute, CanAssortExecute);
+                return this._AssortButton;
             }
         }
-        private DelegateCommand _AssortCommand;
+        private DelegateCommand _AssortButton;
 
         private void AssortExecute()
         {
@@ -43,18 +43,18 @@ namespace FileAssortment
         #endregion
 
         #region TargetButton
-        public DelegateCommand TargetCommand
+        public DelegateCommand TargetButton
         {
             get
             {
-                if (this._TargetCommand == null)
+                if (this._TargetButton == null)
                 {
-                    this._TargetCommand = new DelegateCommand(TargetExecute);
+                    this._TargetButton = new DelegateCommand(TargetExecute);
                 }
-                return this._TargetCommand;
+                return this._TargetButton;
             }
         }
-        private DelegateCommand _TargetCommand;
+        private DelegateCommand _TargetButton;
 
         private void TargetExecute()
         {

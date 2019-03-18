@@ -59,8 +59,8 @@ namespace FileAssortment
                 }
             }
 
-            // todo '2'に関して、ユーザー設定にする
-            foreach (var fileNames in fileNamesGroup.Where(x => x.Value.Count() >= 2).Select(x => x.Value))
+            // todo '3'に関して、ユーザー設定にする
+            foreach (var fileNames in fileNamesGroup.Where(x => x.Value.Count() >= 3).Select(x => x.Value))
             {
                 foreach (var fileName in fileNames)
                 {
@@ -83,14 +83,15 @@ namespace FileAssortment
         }
 
         /// <summary>
-        /// ファイル名から名前部分を抽出する
+        /// ファイル名からスペース区切りで名前タグを抽出する
+        /// 例: "name file.zip"→名前タグは"name"
         /// </summary>
         /// <param name="file">対象ファイル</param>
         /// <returns>名前部分</returns>
         private string PickNameTagFromFile(string fileName)
         {
             int spaceIndex = fileName.IndexOf(" ");
-            return spaceIndex > 0 ? fileName.Substring(0, spaceIndex) : fileName.Replace("[", "").Replace("]", "");
+            return spaceIndex > 0 ? fileName.Substring(0, spaceIndex).Replace("[", "").Replace("]", "") : fileName;
         }
 
         public string SelectDirectory()

@@ -12,12 +12,25 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize">
     <Window.Resources>
-        <ResourceDictionary Source="/Style/StyleDic.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/StyleDic.xaml" />
+                <ResourceDictionary>
+                    <Style x:Key="ProcessingMessage" TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsProcessing, Mode=OneWay}" Value="true">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowDataContext />
     </Window.DataContext>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -36,9 +49,9 @@
                              Margin="5"
                              HorizontalScrollBarVisibility="Auto"
                              IsReadOnly="True"
-                             Text="{Binding Path=TargetDirectory}">
-                    </TextBox>
-                    <StackPanel Orientation="Horizontal" Visibility="Visible">
+                             Text="{Binding Path=TargetDirectory}" />
+                    <StackPanel Orientation="Horizontal"
+                                Style="{StaticResource ProcessingMessage}">
                         <TextBlock Text="{x:Static prop:Resources.M_Processing}"
                                    Margin="5"/>
                         <mah:ProgressRing Width="5"
@@ -49,11 +62,11 @@
                     <Button Content="{x:Static prop:Resources.B_ChooseTargetDir}"
                             Margin="5"
                             Style="{StaticResource ButtonBase}"
-                            Command="{Binding Path=TargetButton}"></Button>
+                            Command="{Binding Path=TargetButton}" />
                     <Button Content="{x:Static prop:Resources.B_Action}"
                             Margin="5"
                             Style="{StaticResource ButtonBase}"
-                            Command="{Binding Path=AssortButton}"></Button>
+                            Command="{Binding Path=AssortButton}" />
                 </StackPanel>
             </StackPanel>
         </Grid>

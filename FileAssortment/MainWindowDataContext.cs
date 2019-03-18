@@ -18,6 +18,13 @@ namespace FileAssortment
             set { if (_TargetDirectory != value) this.SetAndNotify(ref _TargetDirectory, value); }
         }
         private string _TargetDirectory = Resources.M_NoSelectFolder;
+
+        public bool IsProcessing
+        {
+            get { return this._IsProcessing; }
+            set { if (_IsProcessing != value) this.SetAndNotify(ref _IsProcessing, value); }
+        }
+        private bool _IsProcessing = false;
         #endregion
 
         #region AssortButton
@@ -33,6 +40,7 @@ namespace FileAssortment
 
         private void AssortExecute()
         {
+            this.IsProcessing = true;
             _assorter.AssortFile(this.TargetDirectory);
         }
 
@@ -58,6 +66,7 @@ namespace FileAssortment
 
         private void TargetExecute()
         {
+            this.IsProcessing = true;
             this.TargetDirectory = this._assorter.SelectDirectory();
         }
         #endregion

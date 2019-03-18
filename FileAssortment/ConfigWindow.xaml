@@ -4,11 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileAssortment"
+        xmlns:prop="clr-namespace:FileAssortment.Properties"
         mc:Ignorable="d"
         Title="ConfigWindow"
-        SizeToContent="WidthAndHeight"
+        Height="200"
+        Width="300"
         ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary Source="/Style/StyleDic.xaml" />
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Vertical">
+                <TextBlock>・フォルダ新規作成</TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="4">
+                    <TextBox Width="30" Margin="3,0,3,0"></TextBox>
+                    <TextBlock>個</TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Vertical">
+                <Button Content="{x:Static prop:Resources.B_Ok}"
+                        Margin="5"
+                        Style="{StaticResource ButtonBase}"
+                        Command="{Binding Path=TargetButton}" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

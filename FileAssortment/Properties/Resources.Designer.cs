@@ -88,6 +88,15 @@ namespace FileAssortment.Properties {
         }
         
         /// <summary>
+        ///   OK に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string B_Ok {
+            get {
+                return ResourceManager.GetString("B_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   ファイルの仕分けが完了しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string M_AssortComplete {

@@ -11,18 +11,13 @@ using System.Windows;
 
 namespace FileAssortment
 {
-    public class AssortCompleteEventArgs : EventArgs
-    {
-        public bool isError;
-    }
-
     public class FileAssort
     {
+        private readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public delegate void AssortCompleteEventHandler(object sender, AssortCompleteEventArgs e);
 
-        public event AssortCompleteEventHandler Complete;
-
-        private readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public event AssortCompleteEventHandler AssortComplete;
 
         public void AssortFile(string targetDir)
         {
@@ -79,12 +74,12 @@ namespace FileAssortment
                 }
             }
 
-            MessageBox.Show(Resources.M_AssortComplete, Resources.W_ApplicationTitle, MessageBoxButton.OK);
+            AssortComplete(this , new AssortCompleteEventArgs());
         }
 
         /// <summary>
-        /// ファイル名からスペース区切りで名前タグを抽出する
-        /// 例: "name file.zip"→名前タグは"name"
+        /// ファイル名から半角スペース区切りで"名前タグ"を抽出する
+        /// 例: "hoge foo.zip"→名前タグは"hoge"
         /// </summary>
         /// <param name="file">対象ファイル</param>
         /// <returns>名前部分</returns>

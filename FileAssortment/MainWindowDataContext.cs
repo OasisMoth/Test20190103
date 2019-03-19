@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using FileAssortment.Properties;
 
 namespace FileAssortment
 {
     public class MainWindowDataContext : DataContextBase
     {
-        FileAssort _assorter = new FileAssort();
+        private FileAssort Assorter = new FileAssort();
 
-        #region Property
         public string TargetDirectory
         {
             get { return this._TargetDirectory; }
@@ -25,14 +25,13 @@ namespace FileAssortment
             set { if (_IsProcessing != value) this.SetAndNotify(ref _IsProcessing, value); }
         }
         private bool _IsProcessing = false;
-        #endregion
 
         #region AssortButton
         public DelegateCommand AssortButton
         {
             get
             {
-                if(this._AssortButton == null) this._AssortButton = new DelegateCommand(AssortExecute, CanAssortExecute);
+                if (this._AssortButton == null) this._AssortButton = new DelegateCommand(AssortExecute, CanAssortExecute);
                 return this._AssortButton;
             }
         }
@@ -41,7 +40,11 @@ namespace FileAssortment
         private void AssortExecute()
         {
             this.IsProcessing = true;
-            _assorter.AssortFile(this.TargetDirectory);
+            this.Assorter.AssortComplete += new FileAssort.AssortCompleteEventHandler((s, e) => {
+                this.IsProcessing = false;
+                MessageBox.Show(Resources.M_AssortComplete, Resources.W_ApplicationTitle, MessageBoxButton.OK);
+            });
+            this.Assorter.AssortFile(this.TargetDirectory);
         }
 
         private bool CanAssortExecute()
@@ -66,8 +69,7 @@ namespace FileAssortment
 
         private void TargetExecute()
         {
-            this.IsProcessing = true;
-            this.TargetDirectory = this._assorter.SelectDirectory();
+            this.TargetDirectory = this.Assorter.SelectDirectory();
         }
         #endregion
     }

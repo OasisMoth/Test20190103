@@ -19,8 +19,8 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <StackPanel Orientation="Vertical">
-                <TextBlock>・フォルダ新規作成</TextBlock>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock>フォルダ新規作成</TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="4">
                     <TextBox Width="30" Margin="3,0,3,0"></TextBox>
                     <TextBlock>個</TextBlock>

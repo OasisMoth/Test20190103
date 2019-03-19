@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AssortCompleteEventArgs.cs" />
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\DataContextBase.cs" />
     <Page Include="ConfigWindow.xaml">

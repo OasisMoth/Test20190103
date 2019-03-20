@@ -10,7 +10,7 @@ namespace FileAssortment
 {
     public class MainWindowDataContext : DataContextBase
     {
-        private FileAssort Assorter = new FileAssort();
+        private readonly FileAssort Assorter = new FileAssort();
 
         public string TargetDirectory
         {
@@ -40,10 +40,15 @@ namespace FileAssortment
         private void AssortExecute()
         {
             this.IsProcessing = true;
-            this.Assorter.AssortComplete += new FileAssort.AssortCompleteEventHandler((s, e) => {
+            void hundler(object s, AssortCompleteEventArgs e)
+            {
                 this.IsProcessing = false;
-                MessageBox.Show(Resources.M_AssortComplete, Resources.W_ApplicationTitle, MessageBoxButton.OK);
-            });
+                var msg = e.HasError ? Resources.M_AssortCompleteWithError : Resources.M_AssortComplete;
+                MessageBox.Show(msg, Resources.W_ApplicationTitle, MessageBoxButton.OK);
+                this.Assorter.AssortComplete -= hundler;
+            }
+
+            this.Assorter.AssortComplete += hundler;
             this.Assorter.AssortFile(this.TargetDirectory);
         }
 

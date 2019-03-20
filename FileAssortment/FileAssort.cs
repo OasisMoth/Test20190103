@@ -13,14 +13,17 @@ namespace FileAssortment
 {
     public class FileAssort
     {
-        private readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);        
 
         public delegate void AssortCompleteEventHandler(object sender, AssortCompleteEventArgs e);
 
         public event AssortCompleteEventHandler AssortComplete;
 
+        private bool hasAssortError = false;
+
         public void AssortFile(string targetDir)
         {
+            this.hasAssortError = false;
             var targetDirInfo = new DirectoryInfo(targetDir);
             var fileNamesGroup = new Dictionary<string, List<string>>();
 
@@ -50,6 +53,7 @@ namespace FileAssortment
                 }
                 catch (Exception e)
                 {
+                    this.hasAssortError = true;
                     logger.Error($"FileAssort occured error. File:{file.Name}", e);
                 }
             }
@@ -69,12 +73,13 @@ namespace FileAssortment
                     }
                     catch (Exception e)
                     {
+                        this.hasAssortError = true;
                         logger.Error($"FileAssort occured error. File:{fileName}", e);
                     }
                 }
             }
 
-            AssortComplete(this , new AssortCompleteEventArgs());
+            AssortComplete(this , new AssortCompleteEventArgs(this.hasAssortError));
         }
 
         /// <summary>

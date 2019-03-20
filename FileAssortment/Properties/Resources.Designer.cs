@@ -106,6 +106,16 @@ namespace FileAssortment.Properties {
         }
         
         /// <summary>
+        ///   ファイルの仕分け中に1件以上のエラーが発生しました。
+        ///詳細はログに出力されます。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string M_AssortCompleteWithError {
+            get {
+                return ResourceManager.GetString("M_AssortCompleteWithError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   フォルダーを選択してください に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string M_NoSelectFolder {

@@ -8,6 +8,11 @@ namespace FileAssortment
 {
     public class AssortCompleteEventArgs : EventArgs
     {
-        public List<Exception> ErrorHolder = new List<Exception>();
+        public AssortCompleteEventArgs(bool hasError)
+        {
+            this.HasError = hasError;
+        }
+
+        public bool HasError { get; set; } = false;
     }
 }

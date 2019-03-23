@@ -23,6 +23,7 @@ namespace FileAssortment
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowDataContext(new DialogService(this));
         }
 
     }

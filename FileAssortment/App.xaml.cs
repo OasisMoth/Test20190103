@@ -16,15 +16,17 @@ namespace FileAssortment
     /// </summary>
     public partial class App : Application
     {
+        private readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public void Application_StartUp(object sender, StartupEventArgs e)
         {
+            logger.Info("Launch FileAssorter");
             var w = new MainWindow();
             w.ShowDialog();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            var logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
             logger.Fatal("UnhandledException :", e.Exception);
             MessageBox.Show(MainWindow, FileAssortment.Properties.Resources.M_UnhandledException, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 

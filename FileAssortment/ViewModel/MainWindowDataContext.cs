@@ -10,6 +10,13 @@ namespace FileAssortment
 {
     public class MainWindowDataContext : DataContextBase
     {
+        public MainWindowDataContext(IDialogService dialogService)
+        {
+            this._dialogService = dialogService;
+        }
+
+        private IDialogService _dialogService;
+
         private readonly FileAssort Assorter = new FileAssort();
 
         public string TargetDirectory
@@ -44,7 +51,8 @@ namespace FileAssortment
             {
                 this.IsProcessing = false;
                 var msg = e.HasError ? Resources.M_AssortCompleteWithError : Resources.M_AssortComplete;
-                MessageBox.Show(msg, Resources.W_ApplicationTitle, MessageBoxButton.OK);
+                this._dialogService.ShowMessage(msg, Resources.W_ApplicationTitle, MessageBoxButton.OK);
+
                 this.Assorter.AssortComplete -= hundler;
             }
 

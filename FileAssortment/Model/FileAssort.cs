@@ -28,7 +28,7 @@ namespace FileAssortment
             var targetDirInfo = new DirectoryInfo(targetDirPath);
             var fileNamesGroup = new Dictionary<string, List<string>>();
 
-            foreach (var fileName in targetDirInfo.EnumerateFiles().ToList().Select(x => x.Name))
+            foreach (var fileName in targetDirInfo.EnumerateFiles().Select(x => x.Name))
             {
                 try
                 {
@@ -120,7 +120,7 @@ namespace FileAssortment
             logger.Info($"File Move :{fileName}");
         }
 
-        public string SelectDirectory()
+        public string SelectTargetDirectory()
         {
             var dialog = new CommonOpenFileDialog(Resources.W_FolderSelectDialog)
             {
@@ -129,7 +129,7 @@ namespace FileAssortment
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                logger.Info($"Target folder :{dialog.FileName}");
+                logger.Info($"Target Folder :{dialog.FileName}");
                 return dialog.FileName;
             }
             return Resources.M_NoSelectFolder;

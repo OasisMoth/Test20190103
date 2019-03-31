@@ -10,12 +10,15 @@ namespace FileAssortment
 {
     public class MainWindowDataContext : DataContextBase
     {
-        public MainWindowDataContext(IDialogService dialogService)
+        public MainWindowDataContext(IDialogService dialogService, IWindowService windowService)
         {
-            this._dialogService = dialogService;
+            this._DialogService = dialogService;
+            this._ConfigWindowService = windowService;
         }
 
-        private IDialogService _dialogService;
+        private IDialogService _DialogService;
+
+        private IWindowService _ConfigWindowService;
 
         private readonly FileAssort Assorter = new FileAssort();
 
@@ -51,7 +54,7 @@ namespace FileAssortment
             {
                 this.IsProcessing = false;
                 var msg = e.HasError ? Resources.M_AssortCompleteWithError : Resources.M_AssortComplete;
-                this._dialogService.ShowMessage(msg, Resources.W_ApplicationTitle, MessageBoxButton.OK);
+                this._DialogService.ShowMessage(msg, Resources.W_ApplicationTitle, MessageBoxButton.OK);
 
                 this.Assorter.AssortComplete -= hundler;
             }
@@ -82,8 +85,26 @@ namespace FileAssortment
 
         private void TargetExecute()
         {
-            this.TargetDirectory = this.Assorter.SelectDirectory();
+            this.TargetDirectory = this.Assorter.SelectTargetDirectory();
         }
         #endregion
+
+        public DelegateCommand ConfigMenu
+        {
+            get
+            {
+                if (this._ConfigMenu == null)
+                {
+                    this._ConfigMenu = new DelegateCommand(ConfigMenuExecute);
+                }
+                return this._ConfigMenu;
+            }
+        }
+        public DelegateCommand _ConfigMenu;
+
+        private void ConfigMenuExecute()
+        {
+            this._ConfigWindowService.ShowDialog();
+        }
     }
 }

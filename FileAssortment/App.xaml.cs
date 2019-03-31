@@ -21,8 +21,10 @@ namespace FileAssortment
         public void Application_StartUp(object sender, StartupEventArgs e)
         {
             logger.Info("Launch FileAssorter");
-            var w = new MainWindow();
-            w.ShowDialog();
+            var mainWindow = new MainWindow();
+            var configVM = new ViewModel.ConfigWindowDataContext();
+            mainWindow.DataContext = new MainWindowDataContext(new DialogService(mainWindow), new ConfigWindowService(mainWindow, configVM));
+            mainWindow.ShowDialog();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

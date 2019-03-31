@@ -90,6 +90,7 @@
     <Compile Include="AssortCompleteEventArgs.cs" />
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\DataContextBase.cs" />
+    <Compile Include="WindowService.cs" />
     <Page Include="ConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +108,7 @@
     </Compile>
     <Compile Include="DialogService.cs" />
     <Compile Include="Model\FileAssort.cs" />
+    <Compile Include="ViewModel\ConfigWindowDataContext.cs" />
     <Compile Include="ViewModel\MainWindowDataContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

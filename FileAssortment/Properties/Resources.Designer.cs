@@ -116,6 +116,16 @@ namespace FileAssortment.Properties {
         }
         
         /// <summary>
+        ///   名前タグが重複するファイルが設定数以上存在する場合、新規フォルダを作成し仕分けする。
+        ///(1に設定することはできません) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string M_Info_CreateFolderValue {
+            get {
+                return ResourceManager.GetString("M_Info_CreateFolderValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   フォルダーを選択してください に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string M_NoSelectFolder {

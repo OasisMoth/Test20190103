@@ -136,6 +136,10 @@
     <value>ファイルの仕分け中に1件以上のエラーが発生しました。
 詳細はログに出力されます。</value>
   </data>
+  <data name="M_Info_CreateFolderValue" xml:space="preserve">
+    <value>名前タグが重複するファイルが設定数以上存在する場合、新規フォルダを作成し仕分けする。
+(1に設定することはできません)</value>
+  </data>
   <data name="M_NoSelectFolder" xml:space="preserve">
     <value>フォルダーを選択してください</value>
   </data>

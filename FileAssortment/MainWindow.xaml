@@ -35,7 +35,8 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Menu>
-                <MenuItem Header="{x:Static prop:Resources.B_Config}" />
+                <MenuItem Header="{x:Static prop:Resources.B_Config}"
+                          Command="{Binding Path=ConfigMenu}"/>
             </Menu>
         </Grid>
         <Grid Grid.Row="1">

@@ -9,7 +9,8 @@
         Title="ConfigWindow"
         Height="200"
         Width="300"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <ResourceDictionary Source="/Style/StyleDic.xaml" />
     </Window.Resources>
@@ -20,10 +21,16 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock>フォルダ新規作成</TextBlock>
+                <TextBlock Text="フォルダ新規作成">
+                    <ToolTipService.ToolTip>
+                        <TextBlock Text="{x:Static prop:Resources.M_Info_CreateFolderValue}"
+                                   Width="250"
+                                   TextWrapping="Wrap" />
+                    </ToolTipService.ToolTip>
+                </TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="4">
-                    <TextBox Width="30" Margin="3,0,3,0"></TextBox>
-                    <TextBlock>個</TextBlock>
+                    <TextBox Width="30" Margin="3,0,3,0" Text="{Binding Path=FolderCreateValue}"></TextBox>
+                    <TextBlock>(デフォルト値は3)</TextBlock>
                 </StackPanel>
             </StackPanel>
         </Grid>
